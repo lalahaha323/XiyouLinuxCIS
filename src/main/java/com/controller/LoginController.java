@@ -29,12 +29,17 @@ import java.util.Map;
 public class LoginController {
     @Autowired
     private JdbcTemplate jdbcTemplate;
+    /**
+     * 使用指定类初始化日志对象，在日志输出的时候，可以打印出日志信息所在类
+     * 之后在bizLogger.debug("日志信息");将会打印出LoginController:日志信息
+     */
     private static final Logger bizLogger = LoggerFactory.getLogger(LoginController.class);
+
 
     /**
      * 欢迎页面,通过url访问，判断后端服务是否启动
      */
-    @RequestMapping(value = "/welcome", method = RequestMethod.GET)
+    @GetMapping(value = "/welcome")
     public String welcome() {
         return "welcome";
     }
@@ -44,8 +49,8 @@ public class LoginController {
      *
      * @param requestAuthCode 免登临时code
      */
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
     @ResponseBody
+    @PostMapping(value = "/login")
     public ServiceResult login(@RequestParam(value = "authCode") String requestAuthCode, HttpSession session) {
         //获取accessToken,注意正是代码要有异常流处理
         String accessToken = AccessTokenUtil.getToken();
@@ -94,6 +99,7 @@ public class LoginController {
             request.setUserid(userId);
             request.setHttpMethod("GET");
             OapiUserGetResponse response = client.execute(request, accessToken);
+
             Map<String, Object> map = new HashMap<>();
             map.put("userId", userId);
             map.put("userName", response.getName());

@@ -18,4 +18,5 @@ public class RedisMapper {
         ValueOperations<String, String> ops = stringRedisTemplate.opsForValue();
         ops.setBit(key, time, flag);
     }
+
 }
