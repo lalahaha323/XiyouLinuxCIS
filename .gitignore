@@ -1,5 +1,7 @@
 target/
-
+classes/
+artifacts/
+target/
 *.iml
 .idea
 .idea/*
