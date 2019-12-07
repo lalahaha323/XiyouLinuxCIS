@@ -2,6 +2,7 @@ package com.controller;
 
 import com.mapper.RedisMapper;
 import com.service.FindSomedayService;
+import com.service.UserMap;
 import com.util.ServiceResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;

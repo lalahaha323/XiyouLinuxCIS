@@ -40,6 +40,7 @@ public class PushStatusController {
         String id;
         LocalDateTime localDateTime = LocalDateTime.now();
         for(String mac : onlineList) {
+            System.out.println(mac);
             id = userMap.userMap.get(mac);
             if(id != null && id.length() != 0){
                 String key = DateTimeFormatter.ofPattern("yyyyMMdd").format(localDateTime) + ":" + id;

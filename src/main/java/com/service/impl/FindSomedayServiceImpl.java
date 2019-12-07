@@ -52,7 +52,12 @@ public class FindSomedayServiceImpl implements FindSomedayService {
             if (bitmap == null || bitmap.length == 0)
                 continue;
             BitSet bitSet = Byte2Bitset.fromByteArrayReverse(bitmap);
-
+            int alltime = bitSet.cardinality();
+            userUtil.setAllTimeInt(alltime);
+            int hour = alltime / 60;
+            int minutes = alltime % 60;
+            String alltimeString = (((hour == 0) ? "" : (hour + "小时")) + ((minutes == 0) ? "" : (minutes + "分钟")));
+            userUtil.setAllTimeString(alltimeString);
             while (true) {
                 OnOffLineUtil onOffLineUtil = new OnOffLineUtil();
                 int trueIndex = bitSet.nextSetBit(startIndex);
@@ -75,11 +80,16 @@ public class FindSomedayServiceImpl implements FindSomedayService {
             userUtils.add(userUtil);
         }
         jedis.close();
-        return ServiceResult.success(userUtils);
+        return ServiceResult.success(sortTime(userUtils));
     }
 
     @Override
     public ServiceResult findMysql(String date, long time) {
         return null;
+    }
+
+    public List<UserUtil> sortTime(List<UserUtil> userUtils) {
+        Collections.sort(userUtils);
+        return userUtils;
     }
 }
