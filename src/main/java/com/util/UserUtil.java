@@ -2,6 +2,8 @@ package com.util;
 
 import lombok.Data;
 
+import java.util.List;
+
 /**
  * @author lala
  */
@@ -14,4 +16,5 @@ public class UserUtil {
     String id;
     String name;
     int department;
+    List<OnOffLineUtil> onOffLineUtils;
 }

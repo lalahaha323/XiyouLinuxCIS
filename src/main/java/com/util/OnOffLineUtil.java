@@ -12,6 +12,6 @@ import lombok.Data;
 @Data
 public class OnOffLineUtil {
 
-    private long onLine;
-    private long offLine;
+    private int onLine;
+    private int offLine;
 }

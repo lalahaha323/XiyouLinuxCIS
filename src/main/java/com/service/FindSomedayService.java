@@ -1,5 +1,6 @@
 package com.service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.util.ServiceResult;
 
 /**
