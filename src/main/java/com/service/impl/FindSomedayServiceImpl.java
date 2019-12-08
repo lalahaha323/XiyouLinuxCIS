@@ -32,6 +32,7 @@ public class FindSomedayServiceImpl implements FindSomedayService {
 
     @Override
     public ServiceResult findRedis(String date, long time) {
+        AllUser allUser = new AllUser();
         BinaryJedis jedis = jedisPool.getResource();
         String key;
         UserUtil[] userUtils =  allUserMap.allUserMap.values().toArray(new UserUtil[0]);
@@ -82,11 +83,9 @@ public class FindSomedayServiceImpl implements FindSomedayService {
         }
         jedis.close();
         result.sort((a, b) -> b.getAllTimeInt() - a.getAllTimeInt());
-        return ServiceResult.success(result);
-    }
-
-    @Override
-    public ServiceResult findMysql(String date, long time) {
-        return null;
+        allUser.setCheckInPeople(result.size());
+        allUser.setNoCheckInPeople(userUtils.length - result.size());
+        allUser.setUserUtils(result);
+        return ServiceResult.success(allUser);
     }
 }

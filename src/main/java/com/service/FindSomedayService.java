@@ -8,5 +8,4 @@ import com.util.ServiceResult;
 
 public interface FindSomedayService {
     public ServiceResult findRedis(String date, long time);
-    public ServiceResult findMysql(String date, long time);
 }

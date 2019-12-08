@@ -33,7 +33,7 @@ public class FindSomedayController {
             /**
              * 从MySQL中去查找，调用findSomedayService中的findMysql方法
              */
-            return findSomedayService.findMysql(date, time);
+            return findSomedayService.findRedis(date, 1440);
         }
     }
 }
