@@ -35,57 +35,57 @@ public class FindSomedayServiceImpl implements FindSomedayService {
         AllUser allUser = new AllUser();
         BinaryJedis jedis = jedisPool.getResource();
         String key;
-        UserUtil[] userUtils =  allUserMap.allUserMap.values().toArray(new UserUtil[0]);
-        List<UserUtil> result = new ArrayList<>();
-        byte[][] keys= new byte[userUtils.length][];
+        User[] users =  allUserMap.allUserMap.values().toArray(new User[0]);
+        List<User> result = new ArrayList<>();
+        byte[][] keys= new byte[users.length][];
         int i = 0;
-        for (UserUtil userUtil : userUtils) {
-            key = date + ":" + userUtil.getId();
+        for (User user : users) {
+            key = date + ":" + user.getId();
             keys[i++] = key.getBytes();
         }
 
         List<byte[]> bitmaps = jedis.mget(keys);
         i = 0;
         for(byte[] bitmap : bitmaps) {
-            UserUtil userUtil = userUtils[i++];
-            List<OnOffLineUtil> onOffLineUtils = new ArrayList<>();
+            User user = users[i++];
+            List<OnOffLine> onOffLines = new ArrayList<>();
             int startIndex = 420;
             int endIndex = (int) time;
             if(bitmap == null || bitmap.length == 0)
                 continue;
             BitSet bitSet = Byte2Bitset.fromByteArrayReverse(bitmap);
             int alltime = bitSet.cardinality();
-            userUtil.setAllTimeInt(alltime);
+            user.setAllTimeInt(alltime);
             int hour = alltime / 60;
             int minutes = alltime % 60;
             String alltimeString = (((hour == 0) ? "" : (hour + "小时")) + ((minutes == 0) ? "" : (minutes + "分钟")));
-            userUtil.setAllTimeString(alltimeString);
+            user.setAllTimeString(alltimeString);
             while (true) {
-                OnOffLineUtil onOffLineUtil = new OnOffLineUtil();
+                OnOffLine onOffLine = new OnOffLine();
                 int trueIndex = bitSet.nextSetBit(startIndex);
                 if (trueIndex == -1 || trueIndex > endIndex) {
                     break;
                 }
-                onOffLineUtil.setOnLine(trueIndex);
+                onOffLine.setOnLine(trueIndex);
                 startIndex = trueIndex;
                 int falseIndex = bitSet.nextClearBit(startIndex);
                 if (falseIndex == -1 || falseIndex > endIndex) {
-                    onOffLineUtil.setOffLine(endIndex);
-                    onOffLineUtils.add(onOffLineUtil);
+                    onOffLine.setOffLine(endIndex);
+                    onOffLines.add(onOffLine);
                     break;
                 }
-                onOffLineUtil.setOffLine(falseIndex);
+                onOffLine.setOffLine(falseIndex);
                 startIndex = falseIndex;
-                onOffLineUtils.add(onOffLineUtil);
+                onOffLines.add(onOffLine);
             }
-            userUtil.setOnOffLineUtils(onOffLineUtils);
-            result.add(userUtil);
+            user.setOnOffLine(onOffLines);
+            result.add(user);
         }
         jedis.close();
         result.sort((a, b) -> b.getAllTimeInt() - a.getAllTimeInt());
         allUser.setCheckInPeople(result.size());
-        allUser.setNoCheckInPeople(userUtils.length - result.size());
-        allUser.setUserUtils(result);
+        allUser.setNoCheckInPeople(users.length - result.size());
+        allUser.setUsers(result);
         return ServiceResult.success(allUser);
     }
 }

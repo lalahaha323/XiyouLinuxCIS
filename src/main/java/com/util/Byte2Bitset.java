@@ -4,11 +4,9 @@ import java.util.BitSet;
 
 /**
  * @author lala
- */
-
-/**
  * byte[]数组转换成BitSet
  */
+
 public class Byte2Bitset {
     public static BitSet fromByteArrayReverse(final byte[] bytes) {
 

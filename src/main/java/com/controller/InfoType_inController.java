@@ -1,10 +1,10 @@
 package com.controller;
 
+import com.service.AllUserMap;
 import com.util.ServiceResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,8 +19,10 @@ import java.util.Map;
 public class InfoType_inController {
     @Autowired
     JdbcTemplate jdbcTemplate;
+    @Autowired
+    AllUserMap allUserMap;
 
-    @GetMapping("/getInfo")
+    @PostMapping("/getInfo")
     public ServiceResult getInfo(HttpSession session){
         Map user = (Map)session.getAttribute("user");
         if(user == null){
@@ -42,7 +44,6 @@ public class InfoType_inController {
      */
     @PostMapping("submit")
     public ServiceResult submit(@RequestBody Map formData, HttpSession session){
-        System.out.println(formData);
         Map user = (Map)session.getAttribute("user");
         if(user == null){
             return ServiceResult.failure("300", "请重新进入小程序");
@@ -95,7 +96,7 @@ public class InfoType_inController {
                 return ServiceResult.failure("500", "系统错误");
             }
         }
-
+        allUserMap.initMap();
         return ServiceResult.success(null);
     }
 }
