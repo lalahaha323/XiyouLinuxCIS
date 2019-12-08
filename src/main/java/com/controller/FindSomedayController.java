@@ -1,20 +1,12 @@
 package com.controller;
 
-import com.mapper.RedisMapper;
 import com.service.FindSomedayService;
-import com.service.UserMap;
 import com.util.ServiceResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.bind.annotation.*;
-import redis.clients.jedis.Jedis;
-import redis.clients.jedis.JedisPool;
-
-import javax.servlet.http.HttpSession;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.HashMap;
 
 /**
  * @author lala

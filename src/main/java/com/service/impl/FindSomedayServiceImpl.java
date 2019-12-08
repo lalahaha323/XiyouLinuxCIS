@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 import redis.clients.jedis.BinaryJedis;
-import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 import java.util.*;
 
