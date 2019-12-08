@@ -16,5 +16,7 @@ public class User{
     int department;
     String allTimeString;
     int allTimeInt;
+    boolean isOnline;
+    String mac;
     List<OnOffLine> onOffLine;
 }

@@ -1,6 +1,6 @@
 package com.controller;
 
-import com.service.AllUserMap;
+import com.service.AllUserList;
 import com.util.ServiceResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -20,7 +20,7 @@ public class InfoType_inController {
     @Autowired
     JdbcTemplate jdbcTemplate;
     @Autowired
-    AllUserMap allUserMap;
+    AllUserList allUserList;
 
     @PostMapping("/getInfo")
     public ServiceResult getInfo(HttpSession session){
@@ -96,7 +96,7 @@ public class InfoType_inController {
                 return ServiceResult.failure("500", "系统错误");
             }
         }
-        allUserMap.initMap();
+        allUserList.initMap();
         return ServiceResult.success(null);
     }
 }

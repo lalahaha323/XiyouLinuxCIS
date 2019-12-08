@@ -1,7 +1,7 @@
 package com.service.impl;
 
 import com.mapper.RedisMapper;
-import com.service.AllUserMap;
+import com.service.AllUserList;
 import com.service.FindSomedayService;
 import com.util.*;
 import lombok.extern.slf4j.Slf4j;
@@ -28,14 +28,14 @@ public class FindSomedayServiceImpl implements FindSomedayService {
     JdbcTemplate jdbcTemplate;
 
     @Autowired
-    private AllUserMap allUserMap;
+    private AllUserList allUserList;
 
     @Override
     public ServiceResult findRedis(String date, long time) {
         AllUser allUser = new AllUser();
         BinaryJedis jedis = jedisPool.getResource();
         String key;
-        User[] users =  allUserMap.allUserMap.values().toArray(new User[0]);
+        User[] users =  allUserList.allUserList.toArray(new User[allUserList.allUserList.size()]);
         List<User> result = new ArrayList<>();
         byte[][] keys= new byte[users.length][];
         int i = 0;

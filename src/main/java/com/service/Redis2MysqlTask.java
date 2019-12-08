@@ -22,7 +22,7 @@ import java.util.List;
 public class Redis2MysqlTask {
 
     @Autowired
-    AllUserMap allUserMap;
+    AllUserList allUserList;
 
     @Autowired
     JedisPool jedisPool;
@@ -39,7 +39,7 @@ public class Redis2MysqlTask {
         Pipeline pipeline = jedis.pipelined();
         String dateNow = LocalDateTime.now().minusDays(1).format(DateTimeFormatter.ofPattern("yyyyMMdd"));
         //从redis中获取每个人的信息，然后传入到数据库中
-        User[] users =  allUserMap.allUserMap.values().toArray(new User[0]);
+        User[] users =  allUserList.allUserList.toArray(new User[allUserList.allUserList.size()]);
         String[] keys = new String[users.length];
         int i = 0;
         for(User user : users) {
