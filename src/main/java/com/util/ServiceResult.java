@@ -1,5 +1,7 @@
 package com.util;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 import java.io.Serializable;
 
 /**
@@ -14,6 +16,7 @@ public class ServiceResult<T>  implements Serializable{
 
     private String message;
 
+    @JsonView(View.class)
     private T result;
 
     private ServiceResult() {
