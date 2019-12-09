@@ -23,5 +23,6 @@ import java.util.Map;
 public class AllUser {
     int CheckInPeople;
     int NoCheckInPeople;
-    List<Map<String, Object>> users;
+    List<Map<String, Object>> CheckInUsers;
+    List<Map<String, Object>> NoCheckInUsers;
 }
