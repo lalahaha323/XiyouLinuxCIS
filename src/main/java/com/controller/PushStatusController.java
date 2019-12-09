@@ -1,6 +1,5 @@
 package com.controller;
 
-import com.mapper.RedisMapper;
 import com.service.AllUserList;
 import com.util.ServiceResult;
 import com.util.User;
@@ -14,16 +13,12 @@ import redis.clients.jedis.Pipeline;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Map;
 import java.util.Set;
 
 @RestController
 public class PushStatusController {
     @Autowired
     private AllUserList allUserList;
-
-    @Autowired
-    private RedisMapper redisMapper;
 
     @Autowired
     JedisPool jedisPool;

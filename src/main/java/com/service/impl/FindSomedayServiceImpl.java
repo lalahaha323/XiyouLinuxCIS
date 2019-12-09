@@ -1,6 +1,5 @@
 package com.service.impl;
 
-import com.mapper.RedisMapper;
 import com.service.AllUserList;
 import com.service.FindSomedayService;
 import com.util.*;
@@ -18,8 +17,6 @@ import java.util.*;
 @Slf4j
 @Service
 public class FindSomedayServiceImpl implements FindSomedayService {
-    @Autowired
-    RedisMapper redisMapper;
 
     @Autowired
     JedisPool jedisPool;
