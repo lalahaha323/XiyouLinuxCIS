@@ -3,6 +3,7 @@ package com.util;
 import lombok.Data;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author lala
@@ -22,5 +23,5 @@ import java.util.List;
 public class AllUser {
     int CheckInPeople;
     int NoCheckInPeople;
-    List<User> users;
+    List<Map<String, Object>> users;
 }

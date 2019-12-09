@@ -22,7 +22,6 @@ public class OnOffLineShow {
     AllUserList allUserList;
 
     @GetMapping(value = "/onOffShow")
-    @JsonView(View.class)
     public ServiceResult findSomeday() {
         return ServiceResult.success(allUserList.allUserList);
     }
