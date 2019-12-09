@@ -37,7 +37,7 @@ public class PushStatusController {
         for(User user : allUserList.allUserList) {
             if(onlineList.contains(user.getMac())) {
                 user.setOnline(true);
-                String key = "test" + DateTimeFormatter.ofPattern("yyyyMMdd").format(localDateTime) + ":" + user.getId();
+                String key = DateTimeFormatter.ofPattern("yyyyMMdd").format(localDateTime) + ":" + user.getId();
                 long time = localDateTime.getHour() * 60 + localDateTime.getMinute();
                 pipeline.setbit(key, time, true);
                 //在线
@@ -47,6 +47,7 @@ public class PushStatusController {
             }
         }
         pipeline.syncAndReturnAll();
+        jedis.close();
         return null;
     }
 }

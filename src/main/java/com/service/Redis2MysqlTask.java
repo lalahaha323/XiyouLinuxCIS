@@ -48,6 +48,7 @@ public class Redis2MysqlTask {
             i++;
         }
         List<Object> alltime = pipeline.syncAndReturnAll();
+        jedis.close();
 
         for(i = 0; i < users.length; i++) {
             long time = (long) alltime.get(i);

@@ -1,13 +1,12 @@
 package com.controller;
 
-import com.service.Redis2MysqlTask;
+import com.service.FindPeriodTimeService;
 import com.util.ServiceResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
 
 /**
  * @author lala
@@ -18,11 +17,13 @@ import org.springframework.web.bind.annotation.RestController;
 public class FindPeriodTimeController {
 
     @Autowired
-    Redis2MysqlTask redis2MysqlTask;
+    FindPeriodTimeService findPeriodTimeService;
 
     @ResponseBody
-    @GetMapping(value = "/FindSomeday2")
-    public ServiceResult findSomeday() {
+    @GetMapping(value = "/findPeriod")
+    public ServiceResult findPeriodSomeday(@RequestBody HashMap<String, String> map) {
+        String startDay = map.get("startDay");
+        String endDay = map.get("endDay");
         return null;
     }
 }

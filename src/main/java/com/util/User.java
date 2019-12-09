@@ -1,5 +1,6 @@
 package com.util;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import java.util.List;
@@ -17,6 +18,7 @@ public class User{
     String allTimeString;
     int allTimeInt;
     boolean isOnline;
+    @JsonIgnore
     String mac;
     List<OnOffLine> onOffLine;
 }

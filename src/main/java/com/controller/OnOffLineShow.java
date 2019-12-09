@@ -22,7 +22,6 @@ public class OnOffLineShow {
     @ResponseBody
     @GetMapping(value = "/onOffShow")
     public ServiceResult findSomeday() {
-//        return ServiceResult.success(allUserMap.allUserMap.values());
-        return null;
+        return ServiceResult.success(allUserList.allUserList);
     }
 }
