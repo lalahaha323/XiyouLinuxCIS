@@ -36,7 +36,6 @@ public class AllUserList {
             user.setName((String) userMap.get("name"));
             user.setDepartment((Integer) userMap.get("department"));
             user.setMac((String) userMap.get("mac"));
-
             allUserList.add(user);
         }
     }
