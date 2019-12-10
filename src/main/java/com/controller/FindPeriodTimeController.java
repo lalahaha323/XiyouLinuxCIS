@@ -19,11 +19,11 @@ public class FindPeriodTimeController {
     @Autowired
     FindPeriodTimeService findPeriodTimeService;
 
-    @ResponseBody
     @GetMapping(value = "/findPeriod")
     public ServiceResult findPeriodSomeday(@RequestBody HashMap<String, String> map) {
         String startDay = map.get("startDay");
         String endDay = map.get("endDay");
-        return null;
+        System.out.println(startDay + " " + endDay);
+        return findPeriodTimeService.findPeriod(startDay, endDay);
     }
 }
