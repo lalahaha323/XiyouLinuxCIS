@@ -28,6 +28,7 @@ public class AllUserList {
     private JdbcTemplate jdbcTemplate;
 
     public void initMap(){
+        allUserList.clear();
         List<Map<String, Object>> db_users = this.jdbcTemplate.queryForList("SELECT id,name,department,mac FROM user");
         for (Map userMap : db_users){
             User user = new User();
@@ -35,6 +36,7 @@ public class AllUserList {
             user.setName((String) userMap.get("name"));
             user.setDepartment((Integer) userMap.get("department"));
             user.setMac((String) userMap.get("mac"));
+
             allUserList.add(user);
         }
     }
