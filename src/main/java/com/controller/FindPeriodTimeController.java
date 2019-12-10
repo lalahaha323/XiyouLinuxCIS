@@ -23,6 +23,8 @@ public class FindPeriodTimeController {
     public ServiceResult findPeriodSomeday(@RequestBody HashMap<String, String> map) {
         String startDay = map.get("startDay");
         String endDay = map.get("endDay");
+        if(startDay == null || endDay == null)
+            return ServiceResult.failure("777", "你参数输入错误");
         System.out.println(startDay + " " + endDay);
         return findPeriodTimeService.findPeriod(startDay, endDay);
     }

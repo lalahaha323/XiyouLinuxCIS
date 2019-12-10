@@ -13,9 +13,7 @@ import org.springframework.stereotype.Service;
 import redis.clients.jedis.JedisPool;
 
 import java.sql.Date;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -30,9 +28,6 @@ import java.util.Map;
 public class FindPeriodTimeServiceImpl implements FindPeriodTimeService {
     @Autowired
     JdbcTemplate jdbcTemplate;
-
-    @Autowired
-    JedisPool jedisPool;
 
     @Autowired
     AllUserList allUserList;
