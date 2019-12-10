@@ -21,6 +21,8 @@ public class FindSomedayController {
     @ResponseBody
     @GetMapping(value = "/FindSomeday")
     public ServiceResult findSomeday(@Param("date") String date) {
+        if(date == null)
+            return ServiceResult.failure("999", "没有输入日期");
         LocalDateTime localDateTime = LocalDateTime.now();
         String dateNow = DateTimeFormatter.ofPattern("yyyyMMdd").format(localDateTime);
         long time = localDateTime.getHour() * 60 + localDateTime.getMinute();
