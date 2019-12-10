@@ -11,7 +11,6 @@ import java.util.List;
 
 @Data
 public class UserTime {
-    String id;
     String name;
     List<Time> timeList;
 }
