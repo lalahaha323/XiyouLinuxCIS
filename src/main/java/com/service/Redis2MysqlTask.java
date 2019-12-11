@@ -52,9 +52,8 @@ public class Redis2MysqlTask {
 
         for(i = 0; i < users.length; i++) {
             long time = (long) alltime.get(i);
-            int result = jdbcTemplate.update("INSERT INTO daytime VALUES(?,?,?,?)",
+            int result = jdbcTemplate.update("INSERT INTO daytime VALUES(?,?,?)",
                     users[i].getId(),
-                    users[i].getName(),
                     dateNow,
                     time
             );
