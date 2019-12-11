@@ -39,6 +39,8 @@ public class PushStatusServiceImpl implements PushStatusService {
         Jedis jedis = jedisPool.getResource();
         Pipeline pipeline = jedis.pipelined();
         LocalDateTime localDateTime = LocalDateTime.now();
+        System.out.println("pushStatus" + localDateTime);
+        System.out.println(onlineList);
         for(User user : allUserList.allUserList) {
             if(onlineList.contains(user.getMac())) {
                 user.setOnline(true);
@@ -53,7 +55,8 @@ public class PushStatusServiceImpl implements PushStatusService {
         }
         pipeline.syncAndReturnAll();
         jedis.close();
-        System.out.println(localDateTime);
+        localDateTime = LocalDateTime.now();
+        System.out.println("pushStatus" + localDateTime);
         System.out.println(onlineList);
     }
 }
