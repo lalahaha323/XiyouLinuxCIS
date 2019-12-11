@@ -1,6 +1,7 @@
 package com.controller;
 
 import com.service.AllUserList;
+import com.service.PushStatusService;
 import com.util.ServiceResult;
 import com.util.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,37 +18,13 @@ import java.util.Set;
 
 @RestController
 public class PushStatusController {
-    @Autowired
-    private AllUserList allUserList;
 
     @Autowired
-    JedisPool jedisPool;
+    PushStatusService pushStatusService;
 
-    /**
-     * 每分钟发起这个请求，每分钟对redis中进行更新
-     * @param onlineList
-     * @return
-     */
     @PostMapping("/push_status")
     public ServiceResult pushStatus(@RequestBody Set<String> onlineList){
-
-        Jedis jedis = jedisPool.getResource();
-        Pipeline pipeline = jedis.pipelined();
-        LocalDateTime localDateTime = LocalDateTime.now();
-        for(User user : allUserList.allUserList) {
-            if(onlineList.contains(user.getMac())) {
-                user.setOnline(true);
-                String key = DateTimeFormatter.ofPattern("yyyyMMdd").format(localDateTime) + ":" + user.getId();
-                long time = localDateTime.getHour() * 60 + localDateTime.getMinute();
-                pipeline.setbit(key, time, true);
-                //在线
-            } else {
-                //不在线
-                user.setOnline(false);
-            }
-        }
-        pipeline.syncAndReturnAll();
-        jedis.close();
+        pushStatusService.pushStatus(onlineList);
         return null;
     }
 }
