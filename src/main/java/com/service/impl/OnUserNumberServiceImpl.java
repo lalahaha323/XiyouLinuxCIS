@@ -2,8 +2,6 @@ package com.service.impl;
 
 import com.service.AllUserList;
 import com.service.OnUserNumberService;
-import com.util.ServiceResult;
-import com.util.User;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,12 +17,7 @@ public class OnUserNumberServiceImpl implements OnUserNumberService {
     AllUserList allUserList;
 
     @Override
-    public ServiceResult onUserNumber() {
-        int i = 0;
-        for(User user : allUserList.allUserList) {
-            if(user.isOnline())
-                i++;
-        }
-        return ServiceResult.success(i);
+    public int onUserNumber() {
+        return allUserList.onLineNumber;
     }
 }

@@ -1,7 +1,6 @@
 package com.service.impl;
 
 import com.service.AllUserList;
-import com.service.OnUserNumberService;
 import com.service.PushStatusService;
 import com.util.ServiceResult;
 import com.util.User;
@@ -14,6 +13,7 @@ import redis.clients.jedis.Pipeline;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -29,8 +29,6 @@ public class PushStatusServiceImpl implements PushStatusService {
     @Autowired
     JedisPool jedisPool;
 
-    @Autowired
-    OnUserNumberService onUserNumberService;
 
     /**
      * 每分钟发起这个请求，每分钟对redis中进行更新
@@ -43,13 +41,15 @@ public class PushStatusServiceImpl implements PushStatusService {
         Jedis jedis = jedisPool.getResource();
         Pipeline pipeline = jedis.pipelined();
         LocalDateTime localDateTime = LocalDateTime.now();
-        System.out.println("pushStatus " + localDateTime);
+        long time = localDateTime.getHour() * 60 + localDateTime.getMinute();
+        System.out.println("pushStatus " + localDateTime + " " + time);
         System.out.println(onlineList);
+        allUserList.onLineNumber = 0;
         for(User user : allUserList.allUserList) {
             if(onlineList.contains(user.getMac())) {
+                allUserList.onLineNumber++;
                 user.setOnline(true);
                 String key = DateTimeFormatter.ofPattern("yyyyMMdd").format(localDateTime) + ":" + user.getId();
-                long time = localDateTime.getHour() * 60 + localDateTime.getMinute();
                 pipeline.setbit(key, time, true);
                 //在线
             } else {
@@ -57,10 +57,10 @@ public class PushStatusServiceImpl implements PushStatusService {
                 user.setOnline(false);
             }
         }
-        pipeline.syncAndReturnAll();
+        List<Object> list = pipeline.syncAndReturnAll();
         jedis.close();
         localDateTime = LocalDateTime.now();
-        System.out.println("redis成功 " + localDateTime);
-        return onUserNumberService.onUserNumber();
+        System.out.println("redis ok " + localDateTime + " "  + list);
+        return ServiceResult.success(allUserList.onLineNumber);
     }
 }

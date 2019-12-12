@@ -1,6 +1,5 @@
 package com.controller;
 
-import com.service.AllUserList;
 import com.service.OnUserNumberService;
 import com.util.ServiceResult;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +19,6 @@ public class OnUserNumberController {
     OnUserNumberService onUserNumberService;
     @GetMapping(value = "/onUserNumber")
     public ServiceResult onUserNumber() {
-        return onUserNumberService.onUserNumber();
+        return ServiceResult.success(onUserNumberService.onUserNumber());
     }
 }

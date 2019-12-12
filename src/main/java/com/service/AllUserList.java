@@ -6,10 +6,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * @author lala
@@ -25,6 +23,7 @@ import java.util.concurrent.ConcurrentHashMap;
 @Service
 public class AllUserList {
     public List<User> allUserList = new ArrayList<>();
+    public int onLineNumber = 0;
     private JdbcTemplate jdbcTemplate;
 
     public void initMap(){
