@@ -1,6 +1,7 @@
 package com.service.impl;
 
 import com.service.AllUserList;
+import com.service.OnUserNumberService;
 import com.service.PushStatusService;
 import com.util.ServiceResult;
 import com.util.User;
@@ -28,13 +29,16 @@ public class PushStatusServiceImpl implements PushStatusService {
     @Autowired
     JedisPool jedisPool;
 
+    @Autowired
+    OnUserNumberService onUserNumberService;
+
     /**
      * 每分钟发起这个请求，每分钟对redis中进行更新
      * @param onlineList
      * @return
      */
     @Override
-    public void pushStatus(Set<String> onlineList) {
+    public ServiceResult pushStatus(Set<String> onlineList) {
 
         Jedis jedis = jedisPool.getResource();
         Pipeline pipeline = jedis.pipelined();
@@ -57,5 +61,6 @@ public class PushStatusServiceImpl implements PushStatusService {
         jedis.close();
         localDateTime = LocalDateTime.now();
         System.out.println("redis成功 " + localDateTime);
+        return onUserNumberService.onUserNumber();
     }
 }

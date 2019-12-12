@@ -24,7 +24,6 @@ public class PushStatusController {
 
     @PostMapping("/push_status")
     public ServiceResult pushStatus(@RequestBody Set<String> onlineList){
-        pushStatusService.pushStatus(onlineList);
-        return null;
+        return pushStatusService.pushStatus(onlineList);
     }
 }

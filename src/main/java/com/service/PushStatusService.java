@@ -8,5 +8,5 @@ import java.util.Set;
  * @author lala
  */
 public interface PushStatusService {
-    void pushStatus(Set<String> onlineList);
+    ServiceResult pushStatus(Set<String> onlineList);
 }
