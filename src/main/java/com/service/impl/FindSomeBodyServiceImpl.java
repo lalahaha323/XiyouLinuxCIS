@@ -97,6 +97,7 @@ public class FindSomeBodyServiceImpl implements FindSomeBodyService {
         List<byte[]> bitmaps = jedis.mget(keys);
         jedis.close();
         for(byte[] bitmap : bitmaps) {
+            List<OnOffLine> onOffLines = new ArrayList<>();
             int startIndex = 420;
             int endIndex;
             if(i == 0)
@@ -105,10 +106,7 @@ public class FindSomeBodyServiceImpl implements FindSomeBodyService {
                 endIndex = 1440;
             if(bitmap == null || bitmap.length == 0){
                 userSingle.getTimeSingles().get(i).setAllTimeString("");
-//                OnOffLine onOffLine = new OnOffLine();
-//                onOffLine.setOnLine(-1);
-//                onOffLine.setOffLine(-1);
-//                userSingle.getTimeSingles().get(i).getOnOffLines().add(onOffLine);
+                userSingle.getTimeSingles().get(i).setOnOffLines(onOffLines);
                 i++;
                 continue;
             }
@@ -117,7 +115,8 @@ public class FindSomeBodyServiceImpl implements FindSomeBodyService {
             int allTimeInt = bitSet.cardinality();
             int hour = allTimeInt / 60;
             int minutes = allTimeInt % 60;
-            String alltimeString = (((hour == 0) ? "" : (hour + "小时")) + ((minutes == 0) ? "" : (minutes + "分钟")));            List<OnOffLine> onOffLines = new ArrayList<>();
+            String alltimeString = (((hour == 0) ? "" : (hour + "小时")) + ((minutes == 0) ? "" : (minutes + "分钟")));
+
             /**
              * 用户今天上线的时间段统计
              */
@@ -132,9 +131,6 @@ public class FindSomeBodyServiceImpl implements FindSomeBodyService {
                 int falseIndex = bitSet.nextClearBit(startIndex);
                 if (falseIndex == -1 || falseIndex > endIndex) {
                     onOffLine.setOffLine(endIndex);
-                    onOffLines.add(onOffLine);
-                    userSingle.getTimeSingles().get(i).setAllTimeString(alltimeString);
-                    userSingle.getTimeSingles().get(i).getOnOffLines().add(onOffLine);
                     break;
                 }
                 onOffLine.setOffLine(falseIndex);
