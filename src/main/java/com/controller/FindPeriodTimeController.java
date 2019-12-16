@@ -19,7 +19,7 @@ public class FindPeriodTimeController {
     @Autowired
     FindPeriodTimeService findPeriodTimeService;
 
-    @GetMapping(value = "/findPeriod")
+    @PostMapping(value = "/findPeriod")
     public ServiceResult findPeriodSomeday(@RequestBody HashMap<String, String> map) {
         String startDay = map.get("startDay");
         String endDay = map.get("endDay");

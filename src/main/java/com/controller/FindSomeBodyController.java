@@ -23,7 +23,7 @@ public class FindSomeBodyController {
     FindSomeBodyService findSomeBodyService;
 
     @GetMapping(value = "/findSomeBody")
-    public ServiceResult findSomeBody(@Param("name") String name) {
-        return findSomeBodyService.findSomeBody(name);
+    public ServiceResult findSomeBody(@Param("id") String id) {
+        return findSomeBodyService.findSomeBody(id);
     }
 }

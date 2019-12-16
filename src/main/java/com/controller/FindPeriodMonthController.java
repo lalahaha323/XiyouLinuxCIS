@@ -3,10 +3,7 @@ package com.controller;
 import com.service.FindPeriodMonthService;
 import com.util.ServiceResult;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 
@@ -21,7 +18,7 @@ public class FindPeriodMonthController {
     @Autowired
     FindPeriodMonthService findPeriodMonthService;
 
-    @GetMapping(value = "/findPeriodMonth")
+    @PostMapping(value = "/findPeriodMonth")
     public ServiceResult findPeriodMonth(@RequestBody HashMap<String, String> map) {
         String startMonth = map.get("startMonth");
         String endMonth = map.get("endMonth");

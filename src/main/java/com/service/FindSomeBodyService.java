@@ -6,5 +6,5 @@ import com.util.ServiceResult;
  * @author lala
  */
 public interface FindSomeBodyService {
-    ServiceResult findSomeBody(String name);
+    ServiceResult findSomeBody(String id);
 }

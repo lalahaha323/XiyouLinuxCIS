@@ -37,7 +37,7 @@ public class FindSomeBodyServiceImpl implements FindSomeBodyService {
     private AllUserList allUserList;
 
     @Override
-    public ServiceResult findSomeBody(String name) {
+    public ServiceResult findSomeBody(String id) {
         /**
          * 如果是今天的在线时长，需要计算此刻距离0点是几分钟
          */
@@ -61,9 +61,9 @@ public class FindSomeBodyServiceImpl implements FindSomeBodyService {
         /**
          * 从数据库中去查找
          */
-        Map<String, Object> db_user = jdbcTemplate.queryForMap("SELECT id,department FROM user WHERE name = ?", name);
-        String userId = (String) db_user.get("id");
+        Map<String, Object> db_user = jdbcTemplate.queryForMap("SELECT department,name FROM user WHERE id = ?", id);
         int userDepartment = Integer.parseInt(db_user.get("department").toString());
+        String name = (String) db_user.get("name");
         userSingle.setName(name);
         userSingle.setDepartment(userDepartment);
         userSingle.setTimeSingles(timeSingles);
@@ -83,7 +83,7 @@ public class FindSomeBodyServiceImpl implements FindSomeBodyService {
             TimeSingle timeSingle = new TimeSingle();
             timeSingle.setDate(now.format(formatter));
             timeSingles.add(timeSingle);
-            String key = now.format(formatter) + ":" + userId;
+            String key = now.format(formatter) + ":" + id;
             keys[(int)periodDays + 1 - i] = key.getBytes();
             i--;
             now = last2;
@@ -104,6 +104,11 @@ public class FindSomeBodyServiceImpl implements FindSomeBodyService {
             else
                 endIndex = 1440;
             if(bitmap == null || bitmap.length == 0){
+                userSingle.getTimeSingles().get(i).setAllTimeString("");
+//                OnOffLine onOffLine = new OnOffLine();
+//                onOffLine.setOnLine(-1);
+//                onOffLine.setOffLine(-1);
+//                userSingle.getTimeSingles().get(i).getOnOffLines().add(onOffLine);
                 i++;
                 continue;
             }
