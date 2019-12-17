@@ -76,7 +76,9 @@ public class LoginController {
             db_user = jdbcTemplate.queryForMap("SELECT * FROM user WHERE id = ?", userId);
             resultMap.put("mac", db_user.get("mac"));
         }catch (EmptyResultDataAccessException e){
+            /** 数据中没有这个用户 **/
             e.printStackTrace();
+            return ServiceResult.failure(ResultCode.USER_NO_ERROR);
         }
         session.setAttribute("user", resultMap);
         return ServiceResult.success(resultMap);
@@ -85,7 +87,7 @@ public class LoginController {
 
     /** 传过来一个临时码，通过临时码获取用户的unionID，然后通过unionId获取用户的userID，然后从数据库中通过userID将用户的必要信息传入session中 **/
     @CrossOrigin
-    @GetMapping(value = "/get_info_by_tmp_code")
+    @GetMapping(value = "/getWebUser")
     public ServiceResult getInfoByTmpCode(@RequestParam("code") String tmpCode, HttpSession session) throws ApiException {
 
         /** 通过临时码获取unionID **/
