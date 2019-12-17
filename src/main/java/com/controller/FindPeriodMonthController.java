@@ -31,7 +31,9 @@ public class FindPeriodMonthController {
         if(startMonth == null || endMonth == null)
             return ServiceResult.failure(ResultCode.DATE_NO_ENTER_ERROR);
         /** 输入格式不正确 **/
-        if((GenericValidator.isDate(startMonth+"01", "yyyyMMdd", true)) && (GenericValidator.isDate(endMonth+"01", "yyyyMMdd", true)))
+        if(!GenericValidator.isDate(startMonth+"01", "yyyyMMdd", true))
+            return ServiceResult.failure(ResultCode.DATE_FORMATTER_ERROR);
+        if(!GenericValidator.isDate(endMonth+"01", "yyyyMMdd", true))
             return ServiceResult.failure(ResultCode.DATE_FORMATTER_ERROR);
         /** 还没到你输入的月份 **/
         LocalDateTime localDateTime = LocalDateTime.now();

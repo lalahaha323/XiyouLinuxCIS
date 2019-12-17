@@ -28,7 +28,7 @@ public class FindSomedayController {
         if(date == null)
             return ServiceResult.failure(ResultCode.DATE_NO_ENTER_ERROR);
         /** 输入日期格式不正确 **/
-        if(GenericValidator.isDate(date, "yyyyMMdd", true))
+        if(!GenericValidator.isDate(date, "yyyyMMdd", true))
             return ServiceResult.failure(ResultCode.DATE_FORMATTER_ERROR);
         LocalDateTime localDateTime = LocalDateTime.now();
         String dateNow = DateTimeFormatter.ofPattern("yyyyMMdd").format(localDateTime);

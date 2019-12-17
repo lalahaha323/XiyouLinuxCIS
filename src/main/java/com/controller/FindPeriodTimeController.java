@@ -35,7 +35,9 @@ public class FindPeriodTimeController {
         if(startDay == null || endDay == null)
             return ServiceResult.failure(ResultCode.DATE_NO_ENTER_ERROR);
         /** 输入日期格式不正确 **/
-        if((GenericValidator.isDate(startDay, "yyyyMMdd", true)) && (GenericValidator.isDate(endDay, "yyyyMMdd", true)))
+        if(! GenericValidator.isDate(startDay, "yyyyMMdd", true))
+            return ServiceResult.failure(ResultCode.DATE_FORMATTER_ERROR);
+        if(! GenericValidator.isDate(endDay, "yyyyMMdd", true))
             return ServiceResult.failure(ResultCode.DATE_FORMATTER_ERROR);
         /** 前端发过来的时间是今天之后的时间，还没有过 **/
         if(endDay.compareTo(nowDay) >= 0)
