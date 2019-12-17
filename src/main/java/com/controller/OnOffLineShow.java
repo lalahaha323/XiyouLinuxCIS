@@ -1,17 +1,15 @@
 package com.controller;
 
-import com.fasterxml.jackson.annotation.JsonView;
 import com.service.AllUserList;
 import com.util.ServiceResult;
-import com.util.View;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * @author lala
+ * 代码说明：　返回所有用户的在线情况
+ * 执行时间：　当想要看现在有什么人在线就会请求这个请求
  */
 
 @CrossOrigin

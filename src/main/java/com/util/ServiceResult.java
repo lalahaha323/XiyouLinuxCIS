@@ -1,5 +1,6 @@
 package com.util;
 
+import com.config.ResultCode;
 import com.fasterxml.jackson.annotation.JsonView;
 
 import java.io.Serializable;
@@ -39,11 +40,11 @@ public class ServiceResult<T>  implements Serializable{
         return item;
     }
 
-    public static <T> ServiceResult<T> failure(String errorCode) {
+    public static <T> ServiceResult<T> failure(ResultCode resultCode) {
         ServiceResult<T> item = new ServiceResult<T>();
         item.success = false;
-        item.code = errorCode;
-        item.message = "failure";
+        item.code = resultCode.getCode();
+        item.message = resultCode.getMessgae();
         return item;
     }
 

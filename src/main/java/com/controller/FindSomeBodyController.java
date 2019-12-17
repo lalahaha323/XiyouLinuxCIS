@@ -8,11 +8,10 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 /**
- * @author lala
+ * 代码说明：　返回这个用户近一个月的时间线
+ * 执行时间：　想要查看近一个月某人的每天的时间线
  */
 
 @CrossOrigin

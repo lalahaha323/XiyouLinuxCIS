@@ -28,21 +28,12 @@ public class FindSomedayServiceImpl implements FindSomedayService {
     private AllUserList allUserList;
 
     @Override
-    public ServiceResult findRedis(String date, long time) {
-        /**
-         * 最终的返回结果
-         * 包括:
-         * int CheckInPeople;//总共在线人数
-         * int NoCheckInPeople;//总共不在线人数
-         * List<Map<String, Object>> CheckInUsers;//所有在线人数信息
-         * List<Map<String, Object>> NoCheckInUsers;//所有不在线人数信息
-         */
+    public AllUser findRedis(String date, long time) {
+
         AllUser allUser = new AllUser();
         List<Map<String, Object>> checkInUsers = new ArrayList<>();
         List<Map<String, Object>> noCheckUsers = new ArrayList<>();
-        /**
-         * jedis连接，获取连接池中的资源
-         */
+        /** jedis连接，获取连接池中的资源 **/
         BinaryJedis jedis = jedisPool.getResource();
         String key;
         /**
@@ -135,6 +126,6 @@ public class FindSomedayServiceImpl implements FindSomedayService {
         allUser.setNoCheckInPeople(users.length - checkInUsers.size());
         allUser.setCheckInUsers(checkInUsers);
         allUser.setNoCheckInUsers(noCheckUsers);
-        return ServiceResult.success(allUser);
+        return allUser;
     }
 }

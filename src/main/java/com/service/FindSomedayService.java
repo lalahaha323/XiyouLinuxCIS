@@ -1,11 +1,11 @@
 package com.service;
 
-import com.util.ServiceResult;
+import com.util.AllUser;
 
 /**
  * @author lala
  */
 
 public interface FindSomedayService {
-    public ServiceResult findRedis(String date, long time);
+    AllUser findRedis(String date, long time);
 }

@@ -5,11 +5,9 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Calendar;
-import java.util.Date;
 
 /**
- * @author lala
+ * 代码说明：　返回此刻的时间戳
  */
 @CrossOrigin
 @RestController

@@ -10,11 +10,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
-import redis.clients.jedis.JedisPool;
 
 import java.sql.Date;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -34,19 +31,8 @@ public class FindPeriodTimeServiceImpl implements FindPeriodTimeService {
 
     @Override
     public ServiceResult findPeriod(String startDay, String endDay) {
-        /**
-         * 计算今天的日期
-         */
-        LocalDateTime localDateTime = LocalDateTime.now();
-        String nowDay = DateTimeFormatter.ofPattern("yyyyMMdd").format(localDateTime);
-        /**
-         * 前端发过来的时间是今天之后的时间，还没有过
-         */
-        if(endDay.compareTo(nowDay) >= 0)
-            return ServiceResult.failure("409", "只能输入小于等于今天的日期");
-        /**
-         * 最后返回的结果,从数据库中查每个人每天在线的总时长
-         */
+
+        /** 最后返回的结果,从数据库中查每个人每天在线的总时长 **/
         Map<String, UserTime> allUserTime = new HashMap<>();
         User[] users =  allUserList.allUserList.toArray(new User[allUserList.allUserList.size()]);
         for (User user : users) {

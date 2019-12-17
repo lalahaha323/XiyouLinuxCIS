@@ -9,7 +9,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * @author lala
+ * 代码说明：　返回今天的早到排名
+ * 执行时间：　想要查看某天早到排名情况
  */
 @CrossOrigin
 @RestController
