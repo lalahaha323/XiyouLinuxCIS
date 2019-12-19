@@ -1,4 +1,4 @@
-package com.controller;
+package com.controller.admin;
 
 import com.config.ResultCode;
 import com.service.FindPeriodMonthService;
@@ -18,6 +18,7 @@ import java.util.HashMap;
 
 @CrossOrigin
 @RestController
+@RequestMapping("/admin")
 public class FindPeriodMonthController {
 
     @Autowired

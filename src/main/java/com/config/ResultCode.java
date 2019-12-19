@@ -10,6 +10,7 @@ public enum ResultCode {
     /** 关于用户相关的都以700开头 **/
     USER_NOT_EXIST_GROUP_ERROR("7001", "用户不属于小组成员"),
     USER_NO_ERROR("7002", "数据库中没有这个用户"),
+    USER_NO_LOGIN("7003", "用户未登陆"),
 
     /** 和日期相关的都以720开头 **/
     DATE_NO_ENTER_ERROR("7201", "没有输入日期"),

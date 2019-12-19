@@ -1,4 +1,4 @@
-package com.controller;
+package com.controller.other;
 
 import com.config.ResultCode;
 import com.service.AllUserList;
@@ -8,6 +8,7 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpSession;
@@ -21,6 +22,7 @@ import java.util.Map;
  * 发生时间： 当用户提交mac地址的时候[就是用户填写完mac地址之后，点击提交，前端就会给后台发送这个请求]
  */
 @RestController
+@RequestMapping("/other")
 public class CheckUpdateMacController {
 
     @Autowired

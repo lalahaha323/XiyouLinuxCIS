@@ -1,4 +1,4 @@
-package com.controller;
+package com.controller.admin;
 
 import com.service.FindSomeBodyService;
 import com.util.ServiceResult;
@@ -6,16 +6,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 
 /**
  * 代码说明：　返回这个用户近一个月的时间线
- * 执行时间：　想要查看近一个月某人的每天的时间线
+ * 执行时间：　管理员想要查看近一个月某人的每天的时间线
  */
 
 @CrossOrigin
 @RestController
+@RequestMapping("/admin")
 public class FindSomeBodyController {
 
     @Autowired

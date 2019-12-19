@@ -1,4 +1,4 @@
-package com.controller;
+package com.controller.other;
 
 import com.config.Constant;
 import com.config.ResultCode;
@@ -16,8 +16,6 @@ import com.dingtalk.api.response.OapiUserGetuserinfoResponse;
 import com.taobao.api.ApiException;
 import com.util.AccessTokenUtil;
 import com.util.ServiceResult;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -35,6 +33,7 @@ import static com.config.URLConstant.URL_GET_USER_USERID;
  * 发生时间： 当用户点击小程序的时候，就会发送请求到这里，然后后台做一些操作把用户名返回给前端
  */
 @RestController
+@RequestMapping("/other")
 public class LoginController {
 
     @Autowired
@@ -117,6 +116,7 @@ public class LoginController {
             /** 通过userID获取用户重要信息 **/
             try {
                 Map<String, Object> user = jdbcTemplate.queryForMap("SELECT name, isAdmin FROM user WHERE id = ?", userID);
+                user.put("id", userID);
                 session.setAttribute("web_user", user);
                 return ServiceResult.success(user);
             }catch (EmptyResultDataAccessException e){
@@ -128,7 +128,15 @@ public class LoginController {
         }
     }
 
-
+    @CrossOrigin
+    @GetMapping("/getInfo")
+    public ServiceResult getInfo(HttpSession session){
+        Map user = (Map)session.getAttribute("web_user");
+        if(user == null){
+            return ServiceResult.failure(ResultCode.USER_NO_LOGIN);
+        }
+        return ServiceResult.success(user);
+    }
     /** 获取用户信息 **/
     private Map<String, Object> getUserInformation(String accessToken, String userId) {
 

@@ -9,6 +9,9 @@ spring:
   redis:
     host: 47.94.135.164
     port: 6379
+  http:
+    encoding:
+      force: true
 
 
 

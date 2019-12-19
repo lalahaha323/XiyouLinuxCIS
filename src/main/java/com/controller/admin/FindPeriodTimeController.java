@@ -1,4 +1,4 @@
-package com.controller;
+package com.controller.admin;
 
 import com.config.ResultCode;
 import com.service.FindPeriodTimeService;
@@ -13,11 +13,12 @@ import java.util.HashMap;
 
 /**
  * 代码说明： 返回所有用户一段时间内每天的在线总时长数
- * 执行时间： 用户点击开始年月日，点击终止年月日，然后请求这个请求
+ * 执行时间： 管理员点击开始年月日，点击终止年月日，然后请求这个请求
  */
 
 @CrossOrigin
 @RestController
+@RequestMapping("/admin")
 public class FindPeriodTimeController {
 
     @Autowired

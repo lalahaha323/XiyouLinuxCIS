@@ -1,4 +1,4 @@
-package com.controller;
+package com.controller.admin;
 
 import com.config.ResultCode;
 import com.service.FindSomedayService;
@@ -17,6 +17,7 @@ import java.time.format.DateTimeFormatter;
 
 @CrossOrigin
 @RestController
+@RequestMapping("/admin")
 public class FindSomedayController {
 
     @Autowired
