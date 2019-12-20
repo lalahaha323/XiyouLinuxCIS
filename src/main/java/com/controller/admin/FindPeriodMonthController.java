@@ -16,7 +16,7 @@ import java.util.HashMap;
  * 执行时间： 当管理员输入开始月份，和截止月份的时候，出发这个请求
  */
 
-@CrossOrigin
+
 @RestController
 @RequestMapping("/admin")
 public class FindPeriodMonthController {

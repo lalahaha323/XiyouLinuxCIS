@@ -30,7 +30,7 @@ public class CheckUpdateMacController {
     @Autowired
     AllUserList allUserList;
 
-    @PostMapping("submit")
+    @PostMapping(value = "submit")
     public ServiceResult submit(@RequestBody Map formData, HttpSession session){
         Map user = (Map)session.getAttribute("user");
         if(user == null){

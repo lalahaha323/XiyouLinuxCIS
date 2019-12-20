@@ -15,7 +15,7 @@ import java.time.format.DateTimeFormatter;
  * 执行时间： 管理员登录之后的初始化页面，默认显示今天所有同学的在线时间轴，也可以选择时间显示所有同学这个时间的在线时间轴
  */
 
-@CrossOrigin
+
 @RestController
 @RequestMapping("/admin")
 public class FindSomedayController {

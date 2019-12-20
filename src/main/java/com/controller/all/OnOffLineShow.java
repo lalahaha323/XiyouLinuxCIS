@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
  * 执行时间：　当想要看现在有什么人在线就会请求这个请求
  */
 
-@CrossOrigin
+
 @RestController
 @RequestMapping("/all")
 public class OnOffLineShow {

@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
  * 代码说明：　返回今天的早到排名
  * 执行时间：　不管是管理员还是普通用户都可以看到想要查看某天早到排名情况
  */
-@CrossOrigin
+
 @RestController
 @RequestMapping("/all")
 public class EarlyRankController {

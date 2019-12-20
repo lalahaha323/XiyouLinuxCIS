@@ -16,7 +16,7 @@ import java.util.HashMap;
  * 执行时间： 管理员点击开始年月日，点击终止年月日，然后请求这个请求
  */
 
-@CrossOrigin
+
 @RestController
 @RequestMapping("/admin")
 public class FindPeriodTimeController {

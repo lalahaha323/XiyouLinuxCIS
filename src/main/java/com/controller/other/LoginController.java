@@ -1,5 +1,6 @@
 package com.controller.other;
 
+
 import com.config.Constant;
 import com.config.ResultCode;
 import com.config.URLConstant;
@@ -40,13 +41,13 @@ public class LoginController {
     private JdbcTemplate jdbcTemplate;
 
     /** 欢迎页面,通过url访问，判断后端服务是否启动 **/
-    @GetMapping(value = "/welcome")
+    @GetMapping(value = "/welcome" )
     public String welcome() {
         return "welcome";
     }
 
     /** 钉钉用户登录，显示当前登录用户的userId和名称 **/
-    @PostMapping(value = "/login")
+    @PostMapping(value = "/login" )
     public ServiceResult login(@RequestParam(value = "authCode") String requestAuthCode, HttpSession session) {
 
         /** 获取accessToken,注意正式代码要有异常流处理 **/
@@ -85,8 +86,8 @@ public class LoginController {
 
 
     /** 传过来一个临时码，通过临时码获取用户的unionID，然后通过unionId获取用户的userID，然后从数据库中通过userID将用户的必要信息传入session中 **/
-    @CrossOrigin
-    @GetMapping(value = "/getWebUser")
+
+    @GetMapping(value = "/getWebUser" )
     public ServiceResult getInfoByTmpCode(@RequestParam("code") String tmpCode, HttpSession session) throws ApiException {
 
         /** 通过临时码获取unionID **/
@@ -118,6 +119,8 @@ public class LoginController {
                 Map<String, Object> user = jdbcTemplate.queryForMap("SELECT name, isAdmin FROM user WHERE id = ?", userID);
                 user.put("id", userID);
                 session.setAttribute("web_user", user);
+                System.out.println("lala"+user.get("id"));
+                System.out.println(user.get("isAdmin"));
                 return ServiceResult.success(user);
             }catch (EmptyResultDataAccessException e){
                 return ServiceResult.failure(ResultCode.USER_NOT_EXIST_GROUP_ERROR);
@@ -128,12 +131,12 @@ public class LoginController {
         }
     }
 
-    @CrossOrigin
-    @GetMapping("/getInfo")
+
+    @GetMapping(value = "/getInfo" )
     public ServiceResult getInfo(HttpSession session){
         Map user = (Map)session.getAttribute("web_user");
         if(user == null){
-            return ServiceResult.failure(ResultCode.USER_NO_LOGIN);
+            return ServiceResult.failure(ResultCode.USER_NO_LOGIN_ERROR);
         }
         return ServiceResult.success(user);
     }

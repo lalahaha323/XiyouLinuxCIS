@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
  * 执行时间：　小组有人吗？
  */
 
-@CrossOrigin
+
 @RestController
 @RequestMapping("/all")
 public class OnUserNumberController {

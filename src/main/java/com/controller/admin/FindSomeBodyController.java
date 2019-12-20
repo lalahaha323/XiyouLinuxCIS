@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
  * 执行时间：　管理员想要查看近一个月某人的每天的时间线
  */
 
-@CrossOrigin
+
 @RestController
 @RequestMapping("/admin")
 public class FindSomeBodyController {

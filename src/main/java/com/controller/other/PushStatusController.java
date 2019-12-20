@@ -16,7 +16,7 @@ public class PushStatusController {
     @Autowired
     PushStatusService pushStatusService;
 
-    @PostMapping("/push_status")
+    @PostMapping(value = "/push_status" )
     public ServiceResult pushStatus(@RequestBody Set<String> onlineList){
         return pushStatusService.pushStatus(onlineList);
     }
