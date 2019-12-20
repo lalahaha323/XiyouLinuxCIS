@@ -1,4 +1,4 @@
-package com.controller.user;
+package com.controller.all;
 
 import com.config.ResultCode;
 import com.service.FindIndexService;
@@ -19,7 +19,7 @@ import java.util.Map;
 
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/all")
 public class FindIndexController {
 
     @Autowired

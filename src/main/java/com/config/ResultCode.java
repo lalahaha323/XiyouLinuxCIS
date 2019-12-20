@@ -12,6 +12,7 @@ public enum ResultCode {
     USER_NO_ERROR("7002", "数据库中没有这个用户"),
     USER_NO_LOGIN_ERROR("7003", "用户未登陆"),
     USER_NO_ADMIN_ERROR("7004", "不是admin用户"),
+    USER_NO_ID_ERROR("7005", "没有输入用户id"),
 
     /** 和日期相关的都以720开头 **/
     DATE_NO_ENTER_ERROR("7201", "没有输入日期"),
