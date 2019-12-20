@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.config.ResultCode;
 import com.util.ServiceResult;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -18,6 +19,7 @@ import java.util.Map;
 @Component
 public class AdminInterceptor implements HandlerInterceptor {
     @Override
+
     public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o) throws Exception {
 
         Map<String, Object> user = (Map<String, Object>)httpServletRequest.getSession().getAttribute("web_user");
@@ -26,8 +28,10 @@ public class AdminInterceptor implements HandlerInterceptor {
             return true;
         }
         /** 如果是普通用户就阻止 **/
+        httpServletResponse.setContentType("application/json");
+        httpServletResponse.setCharacterEncoding("UTF-8");
         PrintWriter out = httpServletResponse.getWriter();
-        out.write(JSON.toJSONString(ServiceResult.failure(ResultCode.USER_NO_LOGIN)));
+        out.write(JSON.toJSONString(ServiceResult.failure(ResultCode.USER_NO_ADMIN_ERROR)));
         out.flush();
         out.close();
         return false;

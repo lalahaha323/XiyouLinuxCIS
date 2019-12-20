@@ -25,8 +25,10 @@ public class LoginInterceptor implements HandlerInterceptor {
             return true;
         }
         /** 没有登录就继续登录 **/
+        httpServletResponse.setContentType("application/json");
+        httpServletResponse.setCharacterEncoding("UTF-8");
         PrintWriter out = httpServletResponse.getWriter();
-        out.write(JSON.toJSONString(ServiceResult.failure(ResultCode.USER_NO_LOGIN)));
+        out.write(JSON.toJSONString(ServiceResult.failure(ResultCode.USER_NO_LOGIN_ERROR)));
         out.flush();
         out.close();
         return false;

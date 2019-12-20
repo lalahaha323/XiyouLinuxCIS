@@ -14,16 +14,15 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 @Configuration
 public class AdminInterceptorConfig extends WebMvcConfigurerAdapter {
 
-    String[] admin = {"/root"};
+    String[] admin = {"/admin/**"};
     @Override
     public void addInterceptors(InterceptorRegistry interceptorRegistry) {
-        interceptorRegistry.addInterceptor(adminInterceptor())
-                .addPathPatterns(admin);
-
         interceptorRegistry.addInterceptor(loginInterceptor())
                 .addPathPatterns("/**")
-                .excludePathPatterns("/other");
+                .excludePathPatterns("/other/**");
 
+        interceptorRegistry.addInterceptor(adminInterceptor())
+                .addPathPatterns(admin);
         super.addInterceptors(interceptorRegistry);
     }
 
