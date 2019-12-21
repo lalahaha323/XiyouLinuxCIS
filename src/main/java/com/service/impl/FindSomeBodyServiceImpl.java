@@ -39,7 +39,6 @@ public class FindSomeBodyServiceImpl implements FindSomeBodyService {
         /** 如果是今天的在线时长，需要计算此刻距离0点是几分钟 **/
         LocalDateTime nowTime = LocalDateTime.now();
         int allMinutes = nowTime.getHour() * 60 + nowTime.getMinute();
-        System.out.println(allMinutes);
 
         /** 主要看上个月的x号到这个月的x号相差几天 **/
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
@@ -114,19 +113,16 @@ public class FindSomeBodyServiceImpl implements FindSomeBodyService {
                 if (trueIndex == -1 || trueIndex > endIndex) {
                     break;
                 }
-                System.out.println("trueIndex = " + trueIndex);
                 onOffLine.setOnLine(trueIndex);
                 startIndex = trueIndex;
                 int falseIndex = bitSet.nextClearBit(startIndex);
                 if (falseIndex == -1 || falseIndex > endIndex) {
-                    System.out.println("endIndex = " + endIndex);
                     onOffLine.setOffLine(endIndex);
                     onOffLines.add(onOffLine);
                     userSingle.getTimeSingles().get(i).setAllTimeString(alltimeString);
                     userSingle.getTimeSingles().get(i).setOnOffLines(onOffLines);
                     break;
                 }
-                System.out.println("falseIndex = " + falseIndex);
                 onOffLine.setOffLine(falseIndex);
                 startIndex = falseIndex;
                 onOffLines.add(onOffLine);

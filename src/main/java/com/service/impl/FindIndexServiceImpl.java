@@ -117,6 +117,9 @@ public class FindIndexServiceImpl implements FindIndexService {
                 int falseIndex = bitSet.nextClearBit(startIndex);
                 if (falseIndex == -1 || falseIndex > endIndex) {
                     onOffLine.setOffLine(endIndex);
+                    onOffLines.add(onOffLine);
+                    userSingle.getTimeSingles().get(i).setAllTimeString(alltimeString);
+                    userSingle.getTimeSingles().get(i).setOnOffLines(onOffLines);
                     break;
                 }
                 onOffLine.setOffLine(falseIndex);
