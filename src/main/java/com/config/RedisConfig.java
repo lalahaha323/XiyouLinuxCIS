@@ -23,6 +23,12 @@ public class RedisConfig {
     @Value("${spring.redis.port}")
     private int port;
 
+    @Value("${spring.redis.password}")
+    private String password;
+
+    @Value("${spring.redis.timeout}")
+    private int timeout;
+
     @Bean
     public JedisPool redisPoolFactory()  throws Exception{
         log.info("JedisPool注入成功！！");
@@ -30,7 +36,7 @@ public class RedisConfig {
         JedisPoolConfig jedisPoolConfig = new JedisPoolConfig();
         /** 是否启用pool的jmx管理功能, 默认true **/
         jedisPoolConfig.setJmxEnabled(true);
-        JedisPool jedisPool = new JedisPool(jedisPoolConfig, host, port);
+        JedisPool jedisPool = new JedisPool(jedisPoolConfig, host, port, timeout, password);
         return jedisPool;
     }
 
