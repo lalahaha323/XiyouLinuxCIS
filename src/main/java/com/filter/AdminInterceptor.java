@@ -4,7 +4,6 @@ import com.alibaba.fastjson.JSON;
 import com.config.ResultCode;
 import com.util.ServiceResult;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -28,8 +27,6 @@ public class AdminInterceptor implements HandlerInterceptor {
             return true;
         }
         /** 如果是普通用户就阻止 **/
-        httpServletResponse.setContentType("application/json");
-        httpServletResponse.setCharacterEncoding("UTF-8");
         PrintWriter out = httpServletResponse.getWriter();
         out.write(JSON.toJSONString(ServiceResult.failure(ResultCode.USER_NO_ADMIN_ERROR)));
         out.flush();

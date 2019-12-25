@@ -14,12 +14,15 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 @Configuration
 public class AdminInterceptorConfig extends WebMvcConfigurerAdapter {
 
-    String[] admin = {"/admin/**"};
+    private String[] loginVerify = {"/**"};
+    private String[] loginExcludeVerify = {"/other/**"};
+
+    private String[] admin = {"/admin/**"};
     @Override
     public void addInterceptors(InterceptorRegistry interceptorRegistry) {
         interceptorRegistry.addInterceptor(loginInterceptor())
-                .addPathPatterns("/**")
-                .excludePathPatterns("/other/**");
+                .addPathPatterns(loginVerify)
+                .excludePathPatterns(loginExcludeVerify);
 
         interceptorRegistry.addInterceptor(adminInterceptor())
                 .addPathPatterns(admin);
