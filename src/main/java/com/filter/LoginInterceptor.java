@@ -32,13 +32,14 @@ public class LoginInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o) throws Exception {
         httpServletResponse.setContentType("application/json");
         httpServletResponse.setCharacterEncoding("UTF-8");
-        Jedis jedis = jedisPool.getResource();
+
         /** 已经登录就放行 **/
         if(httpServletRequest.getSession().getAttribute("web_user") != null) {
             return true;
         }
 
         /** 没有登录就继续登录 **/
+        Jedis jedis = jedisPool.getResource();
         String passwd = httpServletRequest.getHeader("X-Token");
         String redis_passwd = jedis.get("wifi:Token");
         jedis.close();
