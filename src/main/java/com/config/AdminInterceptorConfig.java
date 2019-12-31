@@ -20,13 +20,13 @@ public class AdminInterceptorConfig extends WebMvcConfigurerAdapter {
     private String[] admin = {"/admin/**"};
     @Override
     public void addInterceptors(InterceptorRegistry interceptorRegistry) {
-//        interceptorRegistry.addInterceptor(loginInterceptor())
-//                .addPathPatterns(loginVerify)
-//                .excludePathPatterns(loginExcludeVerify);
-//
-//        interceptorRegistry.addInterceptor(adminInterceptor())
-//                .addPathPatterns(admin);
-//        super.addInterceptors(interceptorRegistry);
+        interceptorRegistry.addInterceptor(loginInterceptor())
+                .addPathPatterns(loginVerify)
+                .excludePathPatterns(loginExcludeVerify);
+
+        interceptorRegistry.addInterceptor(adminInterceptor())
+                .addPathPatterns(admin);
+        super.addInterceptors(interceptorRegistry);
     }
 
     @Bean
