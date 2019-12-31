@@ -1,6 +1,7 @@
 package com.controller.admin;
 
 import com.config.ResultCode;
+import com.service.FindIdFromNameService;
 import com.service.FindUserPeriodTimeService;
 import com.util.ServiceResult;
 import org.apache.commons.validator.GenericValidator;
@@ -23,13 +24,19 @@ import java.util.HashMap;
 public class FindSomeonePeriodTimeController {
     @Autowired
     FindUserPeriodTimeService findUserPeriodTimeService;
+    @Autowired
+    FindIdFromNameService findIdFromNameService;
 
     @PostMapping(value = "/findPeriodTime")
     public ServiceResult findSomeonePeriodTime(@RequestBody HashMap<String, String> map) {
         String startDay = map.get("startDay");
         String endDay = map.get("endDay");
-        String id = map.get("id");
-
+        String name = map.get("name");
+        String id = findIdFromNameService.findIdFromName(name);
+        /** 数据库中没有这个用户 **/
+        if(id == null) {
+            return ServiceResult.failure(ResultCode.USER_NO_ERROR);
+        }
         /** 计算今天的日期 **/
         LocalDateTime localDateTime = LocalDateTime.now();
         String nowDay = DateTimeFormatter.ofPattern("yyyyMMdd").format(localDateTime);
